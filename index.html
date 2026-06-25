@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Innocent Bosire Moseti • Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&family=Space+Grotesk:wght@500;600&family=Instrument+Sans:wght@400;500;600&display=swap');
+    
+    :root {
+      --accent: 30 58 138; /* deep elegant navy */
+      --accent-dark: 15 23 42;
+    }
+    
+    body {
+      font-family: 'Instrument Sans', 'Inter', system_ui, sans-serif;
+    }
+    
+    .heading-font {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      letter-spacing: -0.03em;
+      font-weight: 700;
+    }
+
+    .elegant-sub {
+      font-family: 'Space Grotesk', system_ui, sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-link {
+      transition: all 0.1s ease;
+    }
+    .nav-link:hover {
+      color: #0f172a;
+    }
+    .dark .nav-link:hover {
+      color: #f1f5f9;
+    }
+
+    .portfolio-card {
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), 
+                  box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .portfolio-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .skill-pill {
+      transition: all 0.1s ease;
+      font-weight: 500;
+    }
+
+    .timeline-item {
+      position: relative;
+    }
+    .timeline-item:not(:last-child):after {
+      content: '';
+      position: absolute;
+      left: 11px;
+      top: 28px;
+      bottom: -8px;
+      width: 2px;
+      background: #cbd5e1;
+    }
+    .dark .timeline-item:not(:last-child):after {
+      background: #334155;
+    }
+
+    .modal {
+      animation: fadeInScale 0.2s ease forwards;
+    }
+    @keyframes fadeInScale {
+      from { opacity: 0; transform: scale(0.96) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+  </style>
+</head>
+<body class="bg-[#f8f7f4] text-slate-900 dark:bg-[#0b101f] dark:text-slate-200">
+  <!-- Navbar -->
+  <nav class="sticky top-0 z-50 bg-[#f8f7f4]/90 dark:bg-[#0b101f]/90 backdrop-blur-xl border-b border-slate-200 dark:border-slate-700">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-x-3">
+        <img src="Bosire Moseti.jpeg" alt="Innocent Bosire Moseti" class="w-9 h-9 rounded-2xl object-cover ring-2 ring-[#1e3a8a]/20 dark:ring-[#e0e7ff]/30">
+        <div class="font-semibold tracking-tight text-xl">Innocent Bosire Moseti</div>
+      </div>
+
+      <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
+        <a href="#about" class="nav-link text-slate-600 dark:text-slate-300">About</a>
+        <a href="#experience" class="nav-link text-slate-600 dark:text-slate-300">Experience</a>
+        <a href="#projects" class="nav-link text-slate-600 dark:text-slate-300">Projects</a>
+        <a href="#skills" class="nav-link text-slate-600 dark:text-slate-300">Skills</a>
+        <a href="#certifications" class="nav-link text-slate-600 dark:text-slate-300">Certifications</a>
+        <a href="#hobbies" class="nav-link text-slate-600 dark:text-slate-300">Hobbies</a>
+      </div>
+
+      <div class="flex items-center gap-x-3">
+        <button id="theme-toggle"
+                class="w-10 h-10 flex items-center justify-center rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-900 text-slate-500 dark:text-slate-400 transition-colors"
+                aria-label="Toggle theme">
+          <i class="fa-solid fa-moon text-lg" id="theme-icon"></i>
+        </button>
+        
+        <a href="#contact" 
+           class="hidden sm:flex items-center gap-x-2 text-sm font-semibold px-5 h-10 bg-[#1e3a8a] hover:bg-[#1e40af] dark:bg-[#e0e7ff] dark:text-[#1e3a8a] dark:hover:bg-[#c7d2fe] text-white rounded-3xl transition-colors">
+          Contact
+        </a>
+        
+        <!-- Mobile nav -->
+        <div class="md:hidden">
+          <button id="mobile-menu-btn"
+                  class="w-10 h-10 flex items-center justify-center rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-900">
+            <i class="fa-solid fa-bars text-xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-700 bg-[#f8f7f4] dark:bg-[#0b101f] px-6 py-4 text-sm">
+      <div class="flex flex-col gap-y-1 font-medium">
+        <a href="#about" class="py-2 nav-link">About</a>
+        <a href="#experience" class="py-2 nav-link">Experience</a>
+        <a href="#projects" class="py-2 nav-link">Projects</a>
+        <a href="#skills" class="py-2 nav-link">Skills</a>
+        <a href="#certifications" class="py-2 nav-link">Certifications</a>
+        <a href="#hobbies" class="py-2 nav-link">Hobbies</a>
+        <a href="#contact" class="mt-2 py-2 font-semibold text-slate-900 dark:text-white">Contact me</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="max-w-6xl mx-auto px-6 pt-16 pb-20">
+    <div class="grid md:grid-cols-12 gap-x-12 gap-y-10 items-center">
+    <div class="md:col-span-7 max-w-3xl">
+      <div class="inline-flex items-center rounded-full bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-[#c7d2fe] px-4 py-1 text-sm mb-6 font-medium">
+        <span class="relative flex h-2 w-2 mr-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1e3a8a] opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-[#1e3a8a]"></span>
+        </span>
+        Open to opportunities
+      </div>
+
+      <h1 class="heading-font text-6xl md:text-7xl font-semibold tracking-[-3.5px] leading-[0.95] text-slate-900 dark:text-white">
+        Innocent Bosire Moseti
+      </h1>
+      
+      <p class="mt-4 text-3xl md:text-4xl elegant-sub text-slate-600 dark:text-slate-400 tracking-[-0.5px]">
+        Senior Network Operations Engineer
+      </p>
+
+      <p class="mt-6 max-w-md text-lg text-slate-600 dark:text-slate-300">
+        I don't just build networks; I forge the unbreakable backbone that turns points of failure into pillars of power and gives ambitious organizations the strength to conquer uncertainty and lead with absolute conviction.
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a href="#projects" 
+           class="inline-flex items-center justify-center gap-x-2 h-12 px-6 rounded-3xl bg-[#1e3a8a] text-white dark:bg-[#e0e7ff] dark:text-[#1e3a8a] font-semibold hover:bg-[#1e40af] dark:hover:bg-[#c7d2fe] transition-all shadow-sm">
+          See my work
+        </a>
+        
+        <a href="https://drive.google.com/file/d/1NfaTfOjrF97R1gLw8aHrlwgo4oYAvUfv/view?usp=sharing" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center justify-center gap-x-2 h-12 px-6 rounded-3xl border border-slate-300 dark:border-slate-700 font-semibold hover:bg-white dark:hover:bg-slate-900 transition-colors">
+          <i class="fa-solid fa-download mr-1.5"></i>
+          <span>Resume</span>
+        </a>
+      </div>
+
+      <div class="mt-8 flex items-center gap-x-5 text-sm text-slate-500 dark:text-slate-400">
+        <div class="flex items-center gap-x-1.5">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>Nairobi, Kenya</span>
+        </div>
+        <span class="text-slate-300 dark:text-slate-600">•</span>
+        <a href="mailto:bosiremoseti@icloud.com" class="hover:text-slate-700 dark:hover:text-slate-200">bosiremoseti@icloud.com</a>
+      </div>
+    </div>
+
+    <div class="md:col-span-5 flex justify-center md:justify-end">
+      <img src="Bosire Moseti.jpeg" alt="Innocent Bosire Moseti"
+           class="w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 object-cover rounded-3xl shadow-xl border border-slate-200 dark:border-slate-700 ring-4 ring-[#1e3a8a]/10 dark:ring-[#e0e7ff]/10">
+    </div>
+    </div>
+  </header>
+
+  <!-- About -->
+  <section id="about" class="border-t border-slate-200 dark:border-slate-700 bg-[#f8f7f4] dark:bg-[#0b101f]">
+    <div class="max-w-6xl mx-auto px-6 py-16">
+      <div class="grid md:grid-cols-12 gap-x-16 gap-y-8">
+        <div class="md:col-span-4">
+          <div class="flex items-center gap-x-3">
+            <i class="fa-solid fa-user text-[#1e3a8a] dark:text-[#c7d2fe] text-2xl"></i>
+            <h2 class="section-title text-4xl font-semibold tracking-tight">About</h2>
+          </div>
+        </div>
+        <div class="md:col-span-8 text-lg leading-relaxed text-slate-600 dark:text-slate-300">
+          <p>Network Engineer with 7+ years of hands-on experience in designing, implementing, and optimizing secure network infrastructure and IT operations. Currently delivering high-performance network services at CallTek Inc, supporting large multi-site organizations, ISPs, and MNCs.</p>
+          
+          <p class="mt-4">Expertise in SonicWall, Fortinet, Cisco, Ruckus, RG Nets, Aruba, Unifi, virtualization, cloud technologies (AWS, Azure, GCP), and compliance frameworks including HIPAA and PCI-DSS. Track record of achieving high system availability, reducing costs, strengthening security posture, and ensuring seamless service delivery.</p>
+          
+          <div class="mt-8 grid grid-cols-3 gap-4 text-sm">
+            <div>
+              <div class="text-slate-500 dark:text-slate-400">Currently</div>
+              <div class="font-semibold">Senior Network Ops Engineer<br>at Calltek Inc</div>
+            </div>
+            <div>
+              <div class="text-slate-500 dark:text-slate-400">Focus areas</div>
+              <div class="font-semibold">Network Security • Infrastructure • Compliance</div>
+            </div>
+            <div>
+              <div class="text-slate-500 dark:text-slate-400">Education</div>
+              <div class="font-semibold">Mount Kenya University<br>Bachelor of Business &amp; IT</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience" class="max-w-6xl mx-auto px-6 py-16 border-t border-slate-200 dark:border-slate-800">
+    <div class="flex items-baseline justify-between mb-8">
+      <div class="flex items-center gap-x-3">
+        <i class="fa-solid fa-briefcase text-[#1e3a8a] dark:text-[#c7d2fe] text-2xl"></i>
+        <h2 class="section-title text-4xl font-semibold tracking-tight">Experience</h2>
+      </div>
+      <a href="https://www.linkedin.com/in/bosiremoseti" target="_blank" class="text-sm hidden md:block text-[#1e3a8a] hover:text-[#1e40af] dark:text-[#64748b] dark:hover:text-slate-300">View full resume →</a>
+    </div>
+
+    <div class="space-y-9">
+      <!-- Senior Network Operations Engineer -->
+      <div class="timeline-item pl-9">
+        <div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-[#1e3a8a] dark:bg-[#e0e7ff] flex items-center justify-center">
+          <i class="fa-solid fa-briefcase text-[10px] text-white dark:text-[#1e3a8a]"></i>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-x-4">
+          <div>
+            <div class="font-semibold text-xl">Senior Network Operations Engineer</div>
+            <div class="text-slate-600 dark:text-slate-300">Calltek Inc • Nairobi, KE (Remote)</div>
+          </div>
+          <div class="text-sm text-slate-500 dark:text-slate-400 font-medium">May 2026 to Present</div>
+        </div>
+        <ul class="mt-3 text-[15px] text-slate-600 dark:text-slate-300 space-y-1 list-disc pl-5">
+          <li>Provide senior-level network operations support in high-volume MSP environments for large multi-site organizations, ISPs, and MNCs.</li>
+          <li>Manage and optimize multi-tenant networks ensuring high availability, performance, and security across hybrid cloud and on-premise infrastructure.</li>
+          <li>Standardize operational processes and runbooks to improve efficiency and reduce MTTR while maintaining strict SLA compliance.</li>
+          <li>Lead incident response, troubleshooting, and optimization of routing, switching, firewalls, VPNs, and wireless networks.</li>
+          <li>Ensure robust security posture and regulatory compliance (HIPAA, PCI-DSS) and support client audits.</li>
+        </ul>
+      </div>
+
+      <!-- Network Administrator -->
+      <div class="timeline-item pl-9">
+        <div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-[#1e3a8a] dark:bg-[#e0e7ff] flex items-center justify-center">
+          <i class="fa-solid fa-briefcase text-[10px] text-white dark:text-[#1e3a8a]"></i>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-x-4">
+          <div>
+            <div class="font-semibold text-xl">Network Administrator</div>
+            <div class="text-slate-600 dark:text-slate-300">Preeminent Technology LLC • Nairobi, KE (Remote)</div>
+          </div>
+          <div class="text-sm text-slate-500 dark:text-slate-400 font-medium">June 2023 to May 2026</div>
+        </div>
+        <ul class="mt-3 text-[15px] text-slate-600 dark:text-slate-300 space-y-1 list-disc pl-5">
+          <li>Designed, implemented, and managed network security using firewalls, routers, switches, VoIP, and wireless infrastructure.</li>
+          <li>Oversaw a portfolio of network projects, enhancing scalability and significantly reducing operational costs.</li>
+          <li>Utilized NetFlow, Wireshark, Splunk, LogicMonitor, and ManageEngine for monitoring, troubleshooting, and security.</li>
+          <li>Conducted compliance audits (HIPAA, PCI) and authored technical specifications, proposals, and system documentation.</li>
+          <li>Delivered remote technical support and maintained high client satisfaction across enterprise environments.</li>
+        </ul>
+      </div>
+
+      <!-- IT Support Specialist -->
+      <div class="timeline-item pl-9">
+        <div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-[#1e3a8a] dark:bg-[#e0e7ff] flex items-center justify-center">
+          <i class="fa-solid fa-briefcase text-[10px] text-white dark:text-[#1e3a8a]"></i>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-x-4">
+          <div>
+            <div class="font-semibold text-xl">IT Support Specialist</div>
+            <div class="text-slate-600 dark:text-slate-300">Philmed Pharmaceuticals Ltd • Nairobi, KE</div>
+          </div>
+          <div class="text-sm text-slate-500 dark:text-slate-400 font-medium">Jan 2022 to Mar 2023</div>
+        </div>
+        <ul class="mt-3 text-[15px] text-slate-600 dark:text-slate-300 space-y-1 list-disc pl-5">
+          <li>Managed a critical server colocation project achieving 99.99% system availability with high-performance secure infrastructure.</li>
+          <li>Developed and implemented a comprehensive IT Security Policy framework, strengthening information asset protection.</li>
+          <li>Led business continuity and disaster recovery planning; managed incidents with minimal operational impact.</li>
+          <li>Managed IT Service Desk operations supporting 1000+ users across 30+ locations with a team of 7 technicians.</li>
+          <li>Drove knowledge management using ManageEngine, SharePoint, Visio, and Microsoft Teams.</li>
+        </ul>
+      </div>
+
+      <!-- Information Technology Officer -->
+      <div class="timeline-item pl-9">
+        <div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-[#1e3a8a] dark:bg-[#e0e7ff] flex items-center justify-center">
+          <i class="fa-solid fa-briefcase text-[10px] text-white dark:text-[#1e3a8a]"></i>
+        </div>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-x-4">
+          <div>
+            <div class="font-semibold text-xl">Information Technology Officer</div>
+            <div class="text-slate-600 dark:text-slate-300">Ufanisi Resorts Ltd • Kisii, KE</div>
+          </div>
+          <div class="text-sm text-slate-500 dark:text-slate-400 font-medium">Jan 2020 to Dec 2021</div>
+        </div>
+        <ul class="mt-3 text-[15px] text-slate-600 dark:text-slate-300 space-y-1 list-disc pl-5">
+          <li>Negotiated and implemented cost-effective IT solutions while leading change management for system upgrades.</li>
+          <li>Designed and executed an enterprise-wide security strategy improving data protection and risk management.</li>
+          <li>Oversaw full IT project lifecycle including server upgrades, network expansions, and infrastructure modernization.</li>
+          <li>Managed IT asset lifecycle, system audits, user access provisioning, and mentored junior technical staff.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="bg-[#f8f7f4] dark:bg-[#0b101f] border-t border-slate-200 dark:border-slate-700">
+    <div class="max-w-6xl mx-auto px-6 py-16">
+      <div class="flex items-center gap-x-3 mb-8">
+        <i class="fa-solid fa-diagram-project text-[#1e3a8a] dark:text-[#c7d2fe] text-2xl"></i>
+        <h2 class="section-title text-4xl font-semibold tracking-tight">Projects</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
+        <!-- Projects populated via JS for easy editing -->
+      </div>
+
+
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="max-w-6xl mx-auto px-6 py-16 border-t border-slate-200 dark:border-slate-700">
+    <div class="flex items-center gap-x-3 mb-8">
+      <i class="fa-solid fa-screwdriver-wrench text-[#1e3a8a] dark:text-[#c7d2fe] text-2xl"></i>
+      <h2 class="section-title text-4xl font-semibold tracking-tight">Skills &amp; Tools</h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8">
+      <div>
+        <h3 class="font-semibold mb-3 tracking-tight text-lg flex items-center gap-x-2">
+          <i class="fa-solid fa-network-wired text-[#1e3a8a] dark:text-[#c7d2fe]"></i>
+          <span>Network Technologies</span>
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">L2/L3 Routing &amp; Switching (Juniper, Cisco, Ruckus, HP Aruba, Huawei, MikroTik, UniFi, Netgear, Linksys)</span>
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">Wireless (Cisco, Ruckus, HP Aruba, UniFi)</span>
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">RG Nets</span>
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">TCP/IP</span>
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">IPSec VPN</span>
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">SDWAN</span>
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">DNS</span>
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">BGP</span>
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">OSPF</span>
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">EIGRP</span>
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">TLS/SSL</span>
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">NetFlow</span>
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">VLANs</span>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="font-semibold mb-3 tracking-tight text-lg flex items-center gap-x-2">
+          <i class="fa-solid fa-shield-halved text-[#1e3a8a] dark:text-[#c7d2fe]"></i>
+          <span>Information Security</span>
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">Firewalls (Fortinet, SonicWall, Palo Alto, Cisco Meraki, Check Point)</span>
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">Cloud Security (AWS, Azure, GCP, OCI)</span>
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">IT Risk Assessment • HIPAA • PCI • SOX</span>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="font-semibold mb-3 tracking-tight text-lg flex items-center gap-x-2">
+          <i class="fa-solid fa-server text-[#1e3a8a] dark:text-[#c7d2fe]"></i>
+          <span>Infrastructure</span>
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">Windows Server &amp; Linux Administration</span>
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">Hyper-V • VMware</span>
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">Active Directory • SCCM • Citrix</span>
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">Veeam Backup • 3CX VoIP</span>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="font-semibold mb-3 tracking-tight text-lg flex items-center gap-x-2">
+          <i class="fa-solid fa-headset text-[#1e3a8a] dark:text-[#c7d2fe]"></i>
+          <span>Service Desk &amp; Monitoring</span>
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">Nagios</span>
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">OpsGenie</span>
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">ManageEngine Ops</span>
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">Freshdesk</span>
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">Zoho MSP</span>
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">Odoo</span>
+          <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">Incident &amp; Service Desk Management</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Certifications -->
+  <section id="certifications" class="max-w-6xl mx-auto px-6 py-16 border-t border-slate-200 dark:border-slate-700">
+    <div class="flex items-center gap-x-3 mb-8">
+      <i class="fa-solid fa-award text-[#1e3a8a] dark:text-[#c7d2fe] text-2xl"></i>
+      <h2 class="section-title text-4xl font-semibold tracking-tight">Certifications</h2>
+    </div>
+
+    <div class="columns-1 sm:columns-2 lg:columns-3 gap-x-8 text-[15px]">
+      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+        <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
+        <span>Certified Information Systems Security Professional (CISSP)</span>
+      </div>
+      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+        <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
+        <span>CompTIA Cloud+ Advanced</span>
+      </div>
+      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+        <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
+        <span>CompTIA Security+</span>
+      </div>
+      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+        <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
+        <span>CompTIA Network+</span>
+      </div>
+      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+        <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
+        <span>CompTIA A+</span>
+      </div>
+      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+        <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
+        <span>Fortinet Cybersecurity Associate</span>
+      </div>
+      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+        <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
+        <span>Ruckus Accredited Wi-Fi Designer</span>
+      </div>
+      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+        <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
+        <span>Ruckus Accredited SmartZone Administrator</span>
+      </div>
+      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+        <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
+        <span>Ruckus Accredited ICX Implementer</span>
+      </div>
+      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+        <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
+        <span>Ruckus Accredited Cloudpath Administrator</span>
+      </div>
+      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+        <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
+        <span>RuckusOne Accredited Implementer</span>
+      </div>
+      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+        <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
+        <span>Ruckus Accredited Support Partner</span>
+      </div>
+      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+        <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
+        <span>3CX Advanced Certified Engineer</span>
+      </div>
+      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+        <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
+        <span>Microsoft Certified Azure AI Fundamentals</span>
+      </div>
+      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+        <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
+        <span>RGNets Certified RXG Operator</span>
+      </div>
+      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+        <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
+        <span>Linux Network Administrator</span>
+      </div>
+      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+        <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
+        <span>HIPAA Compliance Associate</span>
+      </div>
+      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+        <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
+        <span>Advanced Network Operations (ISOC)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education (light section) -->
+  <section class="border-t border-slate-200 dark:border-slate-700">
+    <div class="max-w-6xl mx-auto px-6 py-16">
+      <div class="flex items-center gap-x-3 mb-8">
+        <i class="fa-solid fa-graduation-cap text-[#1e3a8a] dark:text-[#c7d2fe] text-2xl"></i>
+        <h2 class="section-title text-4xl font-semibold tracking-tight">Education</h2>
+      </div>
+      
+      <div class="max-w-xl">
+        <div class="timeline-item pl-9">
+          <div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-[#1e3a8a] dark:bg-[#e0e7ff] flex items-center justify-center">
+            <i class="fa-solid fa-graduation-cap text-[10px] text-white dark:text-[#1e3a8a]"></i>
+          </div>
+          <div class="font-semibold text-xl">Bachelor of Business and Information Technology</div>
+          <div class="text-slate-600 dark:text-slate-300">Mount Kenya University • Computing and Informatics • 2016 to 2018</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hobbies -->
+  <section id="hobbies" class="border-t border-slate-200 dark:border-slate-700 bg-[#f8f7f4] dark:bg-[#0b101f]">
+    <div class="max-w-6xl mx-auto px-6 py-16">
+      <div class="grid md:grid-cols-12 gap-x-16 gap-y-8">
+        <div class="md:col-span-4">
+          <div class="flex items-center gap-x-3">
+            <i class="fa-solid fa-heart text-[#1e3a8a] dark:text-[#c7d2fe] text-2xl"></i>
+            <h2 class="section-title text-4xl font-semibold tracking-tight">Hobbies</h2>
+          </div>
+          <p class="mt-3 text-slate-500 dark:text-slate-400 text-sm">Very indoorsy; ideas, stories, and frontiers.</p>
+        </div>
+        <div class="md:col-span-8 space-y-8 text-lg leading-relaxed text-slate-600 dark:text-slate-300">
+          <div>
+            <div class="flex items-center gap-x-2 font-semibold text-slate-900 dark:text-white mb-2">
+              <i class="fa-solid fa-rocket text-[#1e3a8a] dark:text-[#c7d2fe]"></i>
+              <span>Space tech</span>
+            </div>
+            <p>I love space technology and never miss a chance to watch a rocket launch. I follow space missions closely, from crewed flights to deep-space probes, and keep up with the latest in commercial and government space programs.</p>
+          </div>
+
+          <div>
+            <div class="flex items-center gap-x-2 font-semibold text-slate-900 dark:text-white mb-2">
+              <i class="fa-solid fa-headphones text-[#1e3a8a] dark:text-[#c7d2fe]"></i>
+              <span>Podcasts</span>
+            </div>
+            <p>I enjoy listening to technology and science podcasts, a steady companion while reading, working, or unwinding indoors.</p>
+          </div>
+
+          <div>
+            <div class="flex items-center gap-x-2 font-semibold text-slate-900 dark:text-white mb-2">
+              <i class="fa-solid fa-book-open text-[#1e3a8a] dark:text-[#c7d2fe]"></i>
+              <span>Reading</span>
+            </div>
+            <p>I'm a bibliophile. I read mostly biographies, autobiographies, and history books, the kind that put real lives and pivotal moments in context.</p>
+            <p class="mt-3 text-[15px]">Two favorites so far: <span class="font-medium text-slate-800 dark:text-slate-200">Henry J. Kaiser</span> by Mark Foster and <span class="font-medium text-slate-800 dark:text-slate-200">Elon Musk</span> by Walter Isaacson.</p>
+          </div>
+
+          <div>
+            <div class="flex items-center gap-x-2 font-semibold text-slate-900 dark:text-white mb-2">
+              <i class="fa-solid fa-atom text-[#1e3a8a] dark:text-[#c7d2fe]"></i>
+              <span>Other interests</span>
+            </div>
+            <div class="flex flex-wrap gap-2 mt-1">
+              <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">Mathematics</span>
+              <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">Physics</span>
+              <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">Philosophy</span>
+              <span class="skill-pill px-3 py-1 text-xs bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-2xl">History</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="bg-[#0f172a] dark:bg-black text-white">
+    <div class="max-w-6xl mx-auto px-6 py-16">
+      <div class="max-w-xl">
+        <div class="flex items-center gap-x-3 mb-3">
+          <i class="fa-solid fa-paper-plane text-[#c7d2fe] text-2xl"></i>
+          <h2 class="section-title text-4xl font-semibold tracking-tight">Let's connect</h2>
+        </div>
+        <p class="text-slate-300 mb-8">Always happy to discuss network infrastructure, security, or interesting opportunities.</p>
+
+        <div class="flex flex-wrap gap-4">
+          <a href="mailto:bosiremoseti@icloud.com" class="flex items-center gap-x-3 px-6 py-3 bg-white text-slate-900 rounded-3xl font-semibold hover:bg-slate-100">
+            <i class="fa-solid fa-envelope"></i>
+            <span>Email</span>
+          </a>
+          
+          <a href="https://www.linkedin.com/in/bosiremoseti" target="_blank" class="flex items-center gap-x-3 px-6 py-3 border border-[#64748b] hover:bg-[#1e3a8a] hover:text-white hover:border-[#1e3a8a] rounded-3xl font-semibold transition-colors">
+            <i class="fa-brands fa-linkedin"></i>
+            <span>LinkedIn</span>
+          </a>
+          
+          <a href="tel:+254797066333" class="flex items-center gap-x-3 px-6 py-3 border border-[#64748b] hover:bg-[#1e3a8a] hover:text-white hover:border-[#1e3a8a] rounded-3xl font-semibold transition-colors">
+            <i class="fa-solid fa-phone"></i>
+            <span>+254 797 066 333</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-center py-8 text-sm text-slate-500 border-t border-slate-200 dark:border-slate-700">
+    © <span id="year"></span> Innocent Bosire Moseti
+  </footer>
+
+  <!-- Project Modal -->
+  <div id="project-modal" onclick="if (event.target.id === 'project-modal') closeModal()" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[90] items-center justify-center p-4">
+    <div onclick="event.stopImmediatePropagation()" class="modal max-w-2xl w-full bg-white dark:bg-[#111827] rounded-3xl overflow-hidden shadow-xl border border-slate-200 dark:border-slate-700">
+      <div class="p-8">
+        <div class="flex justify-between items-start">
+          <div>
+            <h3 id="modal-title" class="text-3xl font-semibold tracking-tight"></h3>
+            <div id="modal-subtitle" class="text-sm text-slate-500 mt-1"></div>
+          </div>
+          <button onclick="closeModal()" class="text-3xl leading-none text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">×</button>
+        </div>
+        
+        <div id="modal-tags" class="flex flex-wrap gap-2 mt-4"></div>
+        
+        <div id="modal-description" class="mt-6 text-[15px] leading-relaxed text-slate-600 dark:text-slate-300"></div>
+        
+        <div id="modal-links" class="mt-8 flex gap-4"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Tailwind config + theme
+    function initTailwind() {
+      const isDark = localStorage.theme === 'dark' || 
+        (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      
+      document.documentElement.classList.toggle('dark', isDark);
+      
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'elegant': {
+                50: '#f8f7f4',
+                900: '#0f172a',
+                950: '#0b101f',
+                accent: '#1e3a8a',
+                'accent-light': '#3730a3'
+              }
+            }
+          }
+        }
+      };
+    }
+
+    function initTheme() {
+      const toggle = document.getElementById('theme-toggle');
+      const icon = document.getElementById('theme-icon');
+      
+      function refreshIcon() {
+        const dark = document.documentElement.classList.contains('dark');
+        icon.classList.toggle('fa-moon', !dark);
+        icon.classList.toggle('fa-sun', dark);
+      }
+      
+      refreshIcon();
+      
+      toggle.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.contains('dark');
+        document.documentElement.classList.toggle('dark', !isDark);
+        localStorage.theme = !isDark ? 'dark' : 'light';
+        refreshIcon();
+      });
+    }
+
+    // Mobile menu
+    function initMobileMenu() {
+      const btn = document.getElementById('mobile-menu-btn');
+      const menu = document.getElementById('mobile-menu');
+      
+      btn.addEventListener('click', () => {
+        menu.classList.toggle('hidden');
+      });
+      
+      // Close on nav click
+      menu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => menu.classList.add('hidden'));
+      });
+    }
+
+    // === PROJECTS DATA (based on real achievements) ===
+    const projects = [
+      {
+        id: 1,
+        title: "Multi-Tenant Network Operations Standardization",
+        subtitle: "Calltek Inc",
+        year: "2026",
+        tags: ["Network Operations", "MSP", "SLA Management"],
+        description: "Standardizing operational processes, runbooks, and tooling for high-volume MSP supporting large multi-site organizations, ISPs, and MNCs.",
+        longDescription: "Improving consistency and reducing MTTR across a broad client portfolio by creating standardized runbooks, monitoring practices, and escalation procedures. Delivering proactive monitoring and SLA-driven support for complex hybrid environments including next-gen firewalls and wireless networks.",
+        link: "#",
+        github: "#"
+      },
+      {
+        id: 2,
+        title: "Network Security Design & Infrastructure Modernization",
+        subtitle: "Preeminent Technology",
+        year: "2023-2026",
+        tags: ["Firewalls", "Wireless", "Project Delivery"],
+        description: "Designed and implemented secure network solutions including firewalls (Fortinet, SonicWall, Palo Alto), wireless (Ruckus, Aruba, UniFi), and full infrastructure for enterprise clients.",
+        longDescription: "Delivered end-to-end network security projects: firewalls, routing/switching, VPNs, VoIP (3CX), access points, and servers. Used tools like Wireshark, Splunk, and LogicMonitor for diagnostics. Produced detailed technical documentation and proposals that improved project clarity and client outcomes while reducing costs.",
+        link: "#",
+        github: "#"
+      },
+      {
+        id: 3,
+        title: "Server Colocation & High-Availability Infrastructure",
+        subtitle: "Philmed Pharmaceuticals",
+        year: "2022",
+        tags: ["Infrastructure", "Virtualization", "Disaster Recovery"],
+        description: "Led a critical server colocation project delivering 99.99% system availability and secure infrastructure for a pharmaceutical company across multiple sites.",
+        longDescription: "Successfully planned and executed the full migration and colocation of critical servers. Designed redundant architecture, implemented backup strategies (Veeam/QNAP), and established business continuity processes that achieved near-perfect uptime while meeting strict pharmaceutical compliance requirements.",
+        link: "#",
+        github: "#"
+      },
+      {
+        id: 4,
+        title: "Enterprise IT Security Policy & Compliance Program",
+        subtitle: "Philmed Pharmaceuticals",
+        year: "2022",
+        tags: ["Security", "Compliance", "Policy"],
+        description: "Developed and deployed a comprehensive IT Security Policy framework that significantly strengthened the organization's risk posture and regulatory compliance.",
+        longDescription: "Created organization-wide security policies, conducted risk assessments, and drove implementation of controls aligned with HIPAA and PCI-DSS. Led audits, gap remediation, and staff awareness initiatives that markedly improved data protection and audit readiness.",
+        link: "#",
+        github: "#"
+      }
+    ];
+
+    function renderProjects() {
+      const grid = document.getElementById('projects-grid');
+      grid.innerHTML = '';
+
+      projects.forEach(project => {
+        const card = document.createElement('div');
+        card.className = `portfolio-card group bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700 rounded-3xl p-6 cursor-pointer flex flex-col hover:border-[#1e3a8a]/30 dark:hover:border-slate-600`;
+        
+        const tagsHTML = project.tags.map(t => 
+          `<span class="text-xs px-3 py-0.5 bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 rounded-full">${t}</span>`
+        ).join('');
+
+        card.innerHTML = `
+          <div class="flex justify-between items-start gap-3">
+            <div>
+              <div class="font-semibold text-xl tracking-tight group-hover:underline">${project.title}</div>
+              <div class="text-slate-500 dark:text-slate-400 text-sm mt-0.5 elegant-sub">${project.subtitle} • ${project.year}</div>
+            </div>
+            <div class="w-8 h-8 rounded-xl bg-[#e0e7ff] dark:bg-slate-800 flex items-center justify-center flex-shrink-0">
+              <i class="fa-solid fa-folder-open text-[#1e3a8a] dark:text-[#c7d2fe] text-sm"></i>
+            </div>
+          </div>
+          
+          <p class="mt-4 text-sm text-slate-600 dark:text-slate-300 flex-1 line-clamp-3">${project.description}</p>
+          
+          <div class="mt-5 flex flex-wrap gap-1.5">
+            ${tagsHTML}
+          </div>
+        `;
+        
+        card.onclick = () => openProjectModal(project);
+        grid.appendChild(card);
+      });
+    }
+
+    function openProjectModal(project) {
+      const modal = document.getElementById('project-modal');
+      document.getElementById('modal-title').textContent = project.title;
+      document.getElementById('modal-subtitle').textContent = `${project.subtitle} • ${project.year}`;
+      document.getElementById('modal-description').innerHTML = `<p>${project.longDescription}</p>`;
+      
+      const tagsContainer = document.getElementById('modal-tags');
+      tagsContainer.innerHTML = project.tags.map(t => 
+        `<span class="px-3 py-1 bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-slate-200 text-xs rounded-full">${t}</span>`
+      ).join('');
+      
+      const links = document.getElementById('modal-links');
+      links.innerHTML = `
+        ${project.link && project.link !== '#' ? `
+          <a href="${project.link}" target="_blank" class="px-6 py-2 text-sm font-semibold bg-slate-900 dark:bg-white dark:text-slate-900 text-white rounded-3xl flex items-center gap-x-2 hover:opacity-90">
+            <span>Visit live</span> <i class="fa-solid fa-external-link-alt text-xs"></i>
+          </a>` : ''}
+        
+        ${project.github && project.github !== '#' ? `
+          <a href="${project.github}" target="_blank" class="px-6 py-2 text-sm font-semibold border border-slate-200 dark:border-slate-700 rounded-3xl flex items-center gap-x-2 hover:bg-slate-100 dark:hover:bg-slate-800">
+            <i class="fa-brands fa-github"></i> <span>View code</span>
+          </a>` : ''}
+      `;
+      
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('project-modal');
+      modal.classList.remove('flex');
+      modal.classList.add('hidden');
+    }
+
+    function initYear() {
+      document.getElementById('year').textContent = new Date().getFullYear();
+    }
+
+    function initKeyboard() {
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          const modal = document.getElementById('project-modal');
+          if (!modal.classList.contains('hidden')) closeModal();
+        }
+      });
+    }
+
+    // Boot everything
+    function init() {
+      initTailwind();
+      initTheme();
+      initMobileMenu();
+      renderProjects();
+      initYear();
+      initKeyboard();
+      
+      // Demo hint
+      console.log('%c[Portfolio] Edit the projects array and TODO comments in index.html with your actual resume details.', 'color:#64748b;font-size:12px');
+    }
+
+    window.onload = init;
+  </script>
+</body>
+</html>
