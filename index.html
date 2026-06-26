@@ -2,34 +2,73 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <title>Innocent Bosire Moseti • Portfolio</title>
+  <script>
+    (function () {
+      var dark = localStorage.theme === 'dark' ||
+        (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      if (dark) document.documentElement.classList.add('dark');
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&family=Space+Grotesk:wght@500;600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@700&family=Space+Grotesk:wght@500;600&family=Instrument+Sans:wght@400;500;600&display=swap');
-    
     :root {
       --accent: 30 58 138; /* deep elegant navy */
       --accent-dark: 15 23 42;
     }
     
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
     html {
-      overflow-x: hidden;
       scroll-behavior: smooth;
       -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
     }
 
     body {
       font-family: 'Instrument Sans', 'Inter', system_ui, sans-serif;
-      overflow-x: hidden;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: clip;
+      -webkit-overflow-scrolling: touch;
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .page-wrap {
+      min-width: 0;
+      max-width: 100%;
     }
     
     .heading-font {
       font-family: 'Playfair Display', Georgia, serif;
       font-weight: 700;
       letter-spacing: -0.04em;
-      line-height: 1.05;
+      line-height: 1.1;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+
+    @media (max-width: 639px) {
+      .heading-font {
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+      }
     }
 
     .section-title {
@@ -41,6 +80,11 @@
     .elegant-sub {
       font-family: 'Space Grotesk', system_ui, sans-serif;
       letter-spacing: -0.02em;
+    }
+
+    a, button {
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
 
     .nav-link {
@@ -97,14 +141,31 @@
       from { opacity: 0; transform: scale(0.96) translateY(10px); }
       to { opacity: 1; transform: scale(1) translateY(0); }
     }
+
+    .nav-glass {
+      background-color: rgba(248, 247, 244, 0.97);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+    }
+    .dark .nav-glass {
+      background-color: rgba(11, 16, 31, 0.97);
+    }
+
+    @supports (-webkit-touch-callout: none) {
+      .cert-item {
+        -webkit-column-break-inside: avoid;
+        page-break-inside: avoid;
+        break-inside: avoid-column;
+      }
+    }
   </style>
 </head>
 <body class="bg-[#f8f7f4] text-slate-900 dark:bg-[#0b101f] dark:text-slate-200">
   <!-- Navbar -->
-  <nav class="sticky top-0 z-50 bg-[#f8f7f4]/90 dark:bg-[#0b101f]/90 backdrop-blur-xl border-b border-slate-200 dark:border-slate-700">
+  <nav class="nav-glass sticky top-0 z-50 border-b border-slate-200 dark:border-slate-700" style="padding-top: env(safe-area-inset-top);">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-2">
       <div class="flex items-center gap-x-2 sm:gap-x-3 min-w-0">
-        <img src="Bosire Moseti.jpeg" alt="Innocent Bosire Moseti" class="w-8 h-8 sm:w-9 sm:h-9 rounded-2xl object-cover ring-2 ring-[#1e3a8a]/20 dark:ring-[#e0e7ff]/30 flex-shrink-0">
+        <img src="bosire-moseti.jpeg" alt="Innocent Bosire Moseti" width="36" height="36" class="w-8 h-8 sm:w-9 sm:h-9 rounded-2xl object-cover ring-2 ring-[#1e3a8a]/20 dark:ring-[#e0e7ff]/30 flex-shrink-0">
         <div class="font-semibold tracking-tight text-sm sm:text-lg md:text-xl min-w-0 truncate">
           <span class="sm:hidden">Bosire Moseti</span>
           <span class="hidden sm:inline">Innocent Bosire Moseti</span>
@@ -158,9 +219,9 @@
   </nav>
 
   <!-- Hero -->
-  <header class="max-w-6xl mx-auto px-4 sm:px-6 pt-10 sm:pt-16 pb-12 sm:pb-20">
-    <div class="grid md:grid-cols-12 gap-x-12 gap-y-8 sm:gap-y-10 items-center">
-    <div class="md:col-span-7 max-w-3xl order-2 md:order-1">
+  <header class="page-wrap max-w-6xl mx-auto px-4 sm:px-6 pt-10 sm:pt-16 pb-12 sm:pb-20">
+    <div class="grid md:grid-cols-12 gap-x-12 gap-y-8 sm:gap-y-10 items-center min-w-0">
+    <div class="md:col-span-7 max-w-3xl min-w-0 order-2 md:order-1">
       <div class="inline-flex items-center rounded-full bg-[#e0e7ff] dark:bg-slate-800 text-[#1e3a8a] dark:text-[#c7d2fe] px-4 py-1 text-sm mb-6 font-medium">
         <span class="relative flex h-2 w-2 mr-2">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1e3a8a] opacity-75"></span>
@@ -169,11 +230,11 @@
         Open to opportunities
       </div>
 
-      <h1 class="heading-font text-[2rem] leading-tight sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight sm:tracking-[-2px] md:tracking-[-3.5px] text-slate-900 dark:text-white">
+      <h1 class="heading-font text-[1.75rem] leading-snug sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-slate-900 dark:text-white">
         Innocent Bosire Moseti
       </h1>
       
-      <p class="mt-3 sm:mt-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl elegant-sub text-slate-600 dark:text-slate-400 tracking-tight sm:tracking-[-0.5px]">
+      <p class="mt-3 sm:mt-4 text-lg sm:text-2xl md:text-3xl lg:text-4xl elegant-sub text-slate-600 dark:text-slate-400 tracking-tight">
         Senior Network Operations Engineer
       </p>
 
@@ -218,8 +279,8 @@
     </div>
 
     <div class="md:col-span-5 flex justify-center md:justify-end order-1 md:order-2">
-      <img src="Bosire Moseti.jpeg" alt="Innocent Bosire Moseti"
-           class="w-44 h-44 sm:w-64 sm:h-64 md:w-72 md:h-72 object-cover rounded-3xl shadow-xl border border-slate-200 dark:border-slate-700 ring-4 ring-[#1e3a8a]/10 dark:ring-[#e0e7ff]/10">
+      <img src="bosire-moseti.jpeg" alt="Innocent Bosire Moseti" width="288" height="288"
+           class="w-44 h-44 sm:w-64 sm:h-64 md:w-72 md:h-72 object-cover rounded-3xl shadow-xl border border-slate-200 dark:border-slate-700 ring-4 ring-[#1e3a8a]/10 dark:ring-[#e0e7ff]/10 max-w-full">
     </div>
     </div>
   </header>
@@ -371,7 +432,7 @@
   </section>
 
   <!-- Skills -->
-  <section id="skills" class="max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-16 border-t border-slate-200 dark:border-slate-700">
+  <section id="skills" class="page-wrap max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-16 border-t border-slate-200 dark:border-slate-700">
     <div class="flex items-center gap-x-3 mb-8">
       <i class="fa-solid fa-screwdriver-wrench text-[#1e3a8a] dark:text-[#c7d2fe] text-xl sm:text-2xl"></i>
       <h2 class="section-title text-3xl sm:text-4xl font-semibold tracking-tight">Skills &amp; Tools</h2>
@@ -451,76 +512,76 @@
       <h2 class="section-title text-3xl sm:text-4xl font-semibold tracking-tight">Certifications</h2>
     </div>
 
-    <div class="columns-1 sm:columns-2 lg:columns-3 gap-x-8 text-[15px]">
-      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-2 text-[15px]">
+      <div class="flex items-start gap-2 cert-item mb-2 min-w-0">
         <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
         <span>Certified Information Systems Security Professional (CISSP)</span>
       </div>
-      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+      <div class="flex items-start gap-2 cert-item mb-2 min-w-0">
         <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
         <span>CompTIA Cloud+ Advanced</span>
       </div>
-      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+      <div class="flex items-start gap-2 cert-item mb-2 min-w-0">
         <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
         <span>CompTIA Security+</span>
       </div>
-      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+      <div class="flex items-start gap-2 cert-item mb-2 min-w-0">
         <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
         <span>CompTIA Network+</span>
       </div>
-      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+      <div class="flex items-start gap-2 cert-item mb-2 min-w-0">
         <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
         <span>CompTIA A+</span>
       </div>
-      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+      <div class="flex items-start gap-2 cert-item mb-2 min-w-0">
         <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
         <span>Fortinet Cybersecurity Associate</span>
       </div>
-      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+      <div class="flex items-start gap-2 cert-item mb-2 min-w-0">
         <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
         <span>Ruckus Accredited Wi-Fi Designer</span>
       </div>
-      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+      <div class="flex items-start gap-2 cert-item mb-2 min-w-0">
         <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
         <span>Ruckus Accredited SmartZone Administrator</span>
       </div>
-      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+      <div class="flex items-start gap-2 cert-item mb-2 min-w-0">
         <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
         <span>Ruckus Accredited ICX Implementer</span>
       </div>
-      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+      <div class="flex items-start gap-2 cert-item mb-2 min-w-0">
         <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
         <span>Ruckus Accredited Cloudpath Administrator</span>
       </div>
-      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+      <div class="flex items-start gap-2 cert-item mb-2 min-w-0">
         <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
         <span>RuckusOne Accredited Implementer</span>
       </div>
-      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+      <div class="flex items-start gap-2 cert-item mb-2 min-w-0">
         <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
         <span>Ruckus Accredited Support Partner</span>
       </div>
-      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+      <div class="flex items-start gap-2 cert-item mb-2 min-w-0">
         <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
         <span>3CX Advanced Certified Engineer</span>
       </div>
-      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+      <div class="flex items-start gap-2 cert-item mb-2 min-w-0">
         <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
         <span>Microsoft Certified Azure AI Fundamentals</span>
       </div>
-      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+      <div class="flex items-start gap-2 cert-item mb-2 min-w-0">
         <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
         <span>RGNets Certified RXG Operator</span>
       </div>
-      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+      <div class="flex items-start gap-2 cert-item mb-2 min-w-0">
         <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
         <span>Linux Network Administrator</span>
       </div>
-      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+      <div class="flex items-start gap-2 cert-item mb-2 min-w-0">
         <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
         <span>HIPAA Compliance Associate</span>
       </div>
-      <div class="flex items-start gap-2 break-inside-avoid mb-2">
+      <div class="flex items-start gap-2 cert-item mb-2 min-w-0">
         <i class="fa-solid fa-certificate text-[#1e3a8a] dark:text-[#c7d2fe] text-xs mt-1 flex-shrink-0"></i>
         <span>Advanced Network Operations (ISOC)</span>
       </div>
@@ -636,12 +697,12 @@
     </div>
   </section>
 
-  <footer class="text-center py-8 text-sm text-slate-500 border-t border-slate-200 dark:border-slate-700">
+  <footer class="text-center py-8 text-sm text-slate-500 border-t border-slate-200 dark:border-slate-700" style="padding-bottom: calc(2rem + env(safe-area-inset-bottom));">
     © <span id="year"></span> Innocent Bosire Moseti
   </footer>
 
   <!-- Project Modal -->
-  <div id="project-modal" onclick="if (event.target.id === 'project-modal') closeModal()" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[90] items-end sm:items-center justify-center p-0 sm:p-4">
+  <div id="project-modal" onclick="if (event.target.id === 'project-modal') closeModal()" class="hidden fixed inset-0 bg-black/80 z-[90] items-end sm:items-center justify-center p-0 sm:p-4" style="padding-bottom: env(safe-area-inset-bottom);">
     <div onclick="event.stopImmediatePropagation()" class="modal max-w-2xl w-full bg-white dark:bg-[#111827] rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-xl border border-slate-200 dark:border-slate-700 max-h-[92vh] sm:max-h-[90vh] overflow-y-auto">
       <div class="p-5 sm:p-8">
         <div class="flex justify-between items-start gap-3">
@@ -713,9 +774,25 @@
       const menu = document.getElementById('mobile-menu');
       const icon = document.getElementById('mobile-menu-icon');
 
+      let scrollPosition = 0;
+
       function setMenuOpen(open) {
         menu.classList.toggle('hidden', !open);
-        document.body.style.overflow = open ? 'hidden' : '';
+        if (open) {
+          scrollPosition = window.scrollY;
+          document.body.style.position = 'fixed';
+          document.body.style.top = `-${scrollPosition}px`;
+          document.body.style.left = '0';
+          document.body.style.right = '0';
+          document.body.style.width = '100%';
+        } else {
+          document.body.style.position = '';
+          document.body.style.top = '';
+          document.body.style.left = '';
+          document.body.style.right = '';
+          document.body.style.width = '';
+          window.scrollTo(0, scrollPosition);
+        }
         btn.setAttribute('aria-expanded', open ? 'true' : 'false');
         btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
         icon.classList.toggle('fa-bars', !open);
